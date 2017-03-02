@@ -10,7 +10,7 @@
 
     <groupId>org.vaadin.spring</groupId>
     <artifactId>parent-pom</artifactId>
-    <version>0.0.8-201703-SNAPSHOT</version>
+    <version>0.0.8-vaadin8-201703-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Vaadin4Spring</name>
@@ -81,13 +81,13 @@
 
     <properties>
         <project.build.encoding>UTF-8</project.build.encoding>
-        <project.build.target>1.7</project.build.target>
-        <project.build.source>1.7</project.build.source>
-        <vaadin.version>7.7.7</vaadin.version>
+        <project.build.target>1.8</project.build.target>
+        <project.build.source>1.8</project.build.source>
+        <vaadin.version>8.0.0</vaadin.version>
         <vaadin-touchkit.version>4.0.4</vaadin-touchkit.version>
-        <vaadin-spring.version>1.2.0</vaadin-spring.version>
+        <vaadin-spring.version>2.0.0</vaadin-spring.version>
         <spring.version>4.3.7.RELEASE</spring.version>
-        <spring-boot.version>1.4.4.RELEASE</spring-boot.version>
+        <spring-boot.version>1.5.1.RELEASE</spring-boot.version>
         <spring-security.version>4.2.1.RELEASE</spring-security.version>
         <slf4j.version>1.7.24</slf4j.version>
         <logback.version>1.1.11</logback.version>
