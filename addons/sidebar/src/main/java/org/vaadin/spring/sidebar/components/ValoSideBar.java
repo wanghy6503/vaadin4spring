@@ -21,7 +21,10 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Layout;
+import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.themes.ValoTheme;
+
 import org.vaadin.spring.sidebar.SideBarItemDescriptor;
 import org.vaadin.spring.sidebar.SideBarSectionDescriptor;
 import org.vaadin.spring.sidebar.SideBarUtils;
@@ -49,6 +52,8 @@ public class ValoSideBar extends AbstractSideBar<CssLayout> {
     private Layout headerLayout;
     private Component logo;
     private boolean largeIcons = false;
+    private Button toggleButton;
+    private CssLayout menuItemLayout;
 
     /**
      * You should not need to create instances of this component directly. Instead, just inject the side bar into
@@ -58,6 +63,34 @@ public class ValoSideBar extends AbstractSideBar<CssLayout> {
         super(sideBarUtils);
         setPrimaryStyleName(ValoTheme.MENU_ROOT);
         setSizeUndefined();
+        menuItemLayout = new CssLayout();
+    }
+
+    public void setToggleButton(Button button) {
+        toggleButton = button;
+
+        if (toggleButton != null) {
+            toggleButton.addClickListener(new ClickListener() {
+                @Override
+                public void buttonClick(ClickEvent event) {
+                    if (getCompositionRoot().getStyleName().contains("valo-menu-visible"))
+                        getCompositionRoot().removeStyleName("valo-menu-visible");
+                    else
+                        getCompositionRoot().addStyleName("valo-menu-visible");
+
+                }
+            });
+        }
+    }
+
+    public void hidden() {
+        if (getCompositionRoot() != null)
+            getCompositionRoot().removeStyleName("valo-menu-visible");
+    }
+    
+    public void show() {
+        if (getCompositionRoot() != null && !getCompositionRoot().getStyleName().contains("valo-menu-visible"))
+            getCompositionRoot().addStyleName("valo-menu-visible");
     }
 
     @Override
@@ -75,7 +108,23 @@ public class ValoSideBar extends AbstractSideBar<CssLayout> {
         if (headerLayout != null) {
             layout.addComponent(headerLayout);
         }
+
+        if (toggleButton != null)
+            layout.addComponent(toggleButton);
+
+        menuItemLayout.addStyleName("valo-menuitems");
+        layout.addComponent(menuItemLayout);
+
+        layout.addStyleName("sidebar");
+        layout.addStyleName("no-vertical-drag-hints");
+        layout.addStyleName("no-horizontal-drag-hints");
+
         return layout;
+    }
+    
+    @Override
+    protected CssLayout getMenuItemLayout() {
+        return menuItemLayout;
     }
 
     /**
@@ -261,7 +310,8 @@ public class ValoSideBar extends AbstractSideBar<CssLayout> {
         }
 
         @Override
-        public void createSection(CssLayout compositionRoot, SideBarSectionDescriptor descriptor, Collection<SideBarItemDescriptor> itemDescriptors) {
+        public void createSection(CssLayout compositionRoot, SideBarSectionDescriptor descriptor,
+                Collection<SideBarItemDescriptor> itemDescriptors) {
             Label header = new Label();
             header.setValue(descriptor.getCaption());
             header.setSizeUndefined();

@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.vaadin.spring</groupId>
         <artifactId>parent-pom</artifactId>
-        <version>0.0.8-SNAPSHOT</version>
+        <version>0.0.8-201703-SNAPSHOT</version>
         <relativePath>../../</relativePath>
     </parent>
 
@@ -38,6 +38,11 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

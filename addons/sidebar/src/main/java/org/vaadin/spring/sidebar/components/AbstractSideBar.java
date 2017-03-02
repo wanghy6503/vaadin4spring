@@ -51,6 +51,8 @@ public abstract class AbstractSideBar<CR extends ComponentContainer> extends Cus
      * the side bar is attached to a UI. Every time the side bar is detached, its composition root will be set back to {@code null}.
      */
     protected abstract CR createCompositionRoot();
+    
+    protected abstract CR getMenuItemLayout();
 
     /**
      * {@inheritDoc}
@@ -72,7 +74,7 @@ public abstract class AbstractSideBar<CR extends ComponentContainer> extends Cus
         CR compositionRoot = createCompositionRoot();
         setCompositionRoot(compositionRoot);
         for (SideBarSectionDescriptor section : sideBarUtils.getSideBarSections(getUI().getClass())) {
-            createSection(compositionRoot, section, sideBarUtils.getSideBarItems(section));
+            createSection(getMenuItemLayout(), section, sideBarUtils.getSideBarItems(section));
         }
     }
 

@@ -20,6 +20,7 @@ import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.Accordion;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.NativeButton;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
@@ -86,6 +87,11 @@ public class AccordionSideBar extends AbstractSideBar<Accordion> {
         Accordion accordion = new Accordion();
         accordion.setSizeFull();
         return accordion;
+    }
+    
+    @Override
+    protected Accordion getMenuItemLayout() {
+        return getCompositionRoot();
     }
 
     @Override
